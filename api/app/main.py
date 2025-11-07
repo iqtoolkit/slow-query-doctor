@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import analyze
+from app.routers import analyze, config
 from app.core.config import settings
 import logging
 import time
@@ -31,6 +31,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(analyze.router)
+app.include_router(config.router)
 
 @app.get("/")
 async def root():

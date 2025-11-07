@@ -1,0 +1,71 @@
+# Default configuration template for Slow Query Doctor API
+# This file will be created automatically if no config file is found
+
+# API Configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  debug: false
+  allowed_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8000"
+
+# Security
+security:
+  api_key_enabled: false
+  api_key: ""  # Set this in your actual config file
+  cors_enabled: true
+
+# AI/LLM Configuration
+llm:
+  provider: "ollama"  # Options: ollama, openai
+  ollama:
+    base_url: "http://localhost:11434"
+    model: "llama2:13b"
+    timeout: 300
+  openai:
+    base_url: "https://api.openai.com/v1"
+    model: "gpt-4"
+    timeout: 300
+
+# Analysis Configuration
+analysis:
+  max_log_size_mb: 50
+  max_queries_per_request: 100
+  min_duration_ms: 1000
+  top_n_queries: 10
+  formats:
+    - plain
+    - csv
+    - json
+
+# Database Support
+databases:
+  postgresql:
+    enabled: true
+    log_formats:
+      - plain
+      - csv
+      - json
+  mysql:
+    enabled: false  # Coming in v0.4.0
+  sqlserver:
+    enabled: false  # Coming in v0.4.0
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "api.log"
+  max_size_mb: 100
+  backup_count: 5
+
+# Report Generation
+reports:
+  formats:
+    - markdown
+    - html
+  syntax_highlighting: true
+  include_execution_plan: true
+  max_queries_per_report: 50
